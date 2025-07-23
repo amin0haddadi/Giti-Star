@@ -1,5 +1,5 @@
 "use client";
-import { HEADER_ITEMS } from "@/constants";
+import { HEADER_ITEMS } from "@/lib/mock";
 import { HeaderProps } from "@/types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
