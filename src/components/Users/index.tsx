@@ -2,7 +2,30 @@
 import { IUsersProps } from "@/types";
 import { FC } from "react";
 
+import { Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Tooltip,
+  Legend
+} from "chart.js";
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
+
 const UsersChart: FC<IUsersProps> = ({ users }) => {
+  const chartData = {
+    labels: users.map((user) => user.name),
+    datasets: [
+      {
+        label: "تعداد حروف نام",
+        data: users.map((user) => user.name.replace(/\s/g, "").length),
+        backgroundColor: "rgba(59, 130, 246, 0.5)"
+      }
+    ]
+  };
+
   return (
     <div className="max-w-4xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-4 text-center">لیست کاربران</h1>
@@ -22,6 +45,11 @@ const UsersChart: FC<IUsersProps> = ({ users }) => {
           ))}
         </tbody>
       </table>
+
+      <div className="bg-white p-6 rounded-lg shadow">
+        <h2 className="text-xl font-semibold mb-4">نمودار تعداد حروف نام‌ها</h2>
+        <Bar data={chartData} />
+      </div>
     </div>
   );
 };
