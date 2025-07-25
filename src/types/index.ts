@@ -34,3 +34,7 @@ export type User = {
     };
   };
 };
+
+export interface IUsersProps {
+  users: User[];
+}
